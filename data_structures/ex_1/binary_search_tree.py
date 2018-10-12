@@ -6,23 +6,33 @@ class BinarySearchTree:
 
   def depth_first_for_each(self, cb):
     #create an empty stack
-    stack=[]
+    stack=[self]
     #append the self to the stack
-    stack.append(self)
-    if stack > 0:
+    while stack:
       #create a object that holds the values within stack
       current = stack.pop()
-      #give the callback function current.
-      cb(current.value)
       #find out whether the right or left side has any values, if so then append the current.value right or left.
-      if current.right is not None:
+      if current.right:
         stack.append(current.right)
-      if current.left is not None:
+      if current.left:
         stack.append(current.left)
+      #invoke the callback function
+      cb(current.value)
 
   def breadth_first_for_each(self, cb):
-    
-    pass
+    #create a object called queue and add the root to it
+    queue = [self]
+    #loop through the queue to find the values within the branches
+    while queue:
+        leaf = queue.pop(0)
+        #if there is a leaf on the left then add to the queue
+        if leaf.left:
+            queue.append(leaf.left)
+        #if there is a leaf on the right add to the queue
+        if leaf.right:
+            queue.append(leaf.right)
+        #invoke the callback function
+        cb(leaf.value)
 
   def insert(self, value):
     new_tree = BinarySearchTree(value)

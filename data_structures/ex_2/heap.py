@@ -1,6 +1,17 @@
 def heapsort(arr):
- pass 
- 
+  #create object called heap that called the class Heap()
+  # also create a empty arr called heaped so that new items could be inserted in
+  heap = Heap()
+  heaped = []
+
+  #loop through the arr and find the each item, then insert the items into heap
+  for item in arr:
+    heap.insert(item)
+  #loop through the arr find each item and delete them from heap and insert them into heaped
+  for item in arr:
+    heaped.insert(0, heap.delete())
+
+  return heaped
 
 class Heap:
   def __init__(self):
